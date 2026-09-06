@@ -28,8 +28,10 @@ class SosOrchestrator {
     Position? position;
     try {
       position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: batteryLevel < 15 ? LocationAccuracy.low : LocationAccuracy.high,
-        timeLimit: const Duration(seconds: 10),
+        locationSettings: LocationSettings(
+          accuracy: batteryLevel < 15 ? LocationAccuracy.low : LocationAccuracy.high,
+          timeLimit: const Duration(seconds: 10),
+        ),
       );
     } catch (e) {
       position = await Geolocator.getLastKnownPosition();
