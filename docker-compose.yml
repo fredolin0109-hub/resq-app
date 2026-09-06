@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Mock API & Telemetry Gateway
+  resq-mock-backend:
+    image: node:20-alpine
+    container_name: resq-mock-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Vector Map Offline Tile Cache Service
+  resq-tile-server:
+    image: nginx:alpine
+    container_name: resq-tile-server
+    ports:
+      - "8081:80"
+    restart: unless-stopped
