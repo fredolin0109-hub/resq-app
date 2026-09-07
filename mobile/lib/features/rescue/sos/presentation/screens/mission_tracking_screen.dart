@@ -43,11 +43,11 @@ class MissionTrackingScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Mission Overview Card
+              // 1. Mission Overview Card
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -95,19 +95,99 @@ class MissionTrackingScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
+              const SizedBox(height: 16),
+
+              // 2. Live Telemetry & GPS Radar Banner
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0F172A),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.blue.shade800),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(Icons.radar_rounded, color: Colors.cyanAccent, size: 20),
+                            SizedBox(width: 8),
+                            Text(
+                              'Live Tactical Telemetry',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade900.withValues(alpha: 0.6),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            'GPS LOCK • 4.2m ACCURACY',
+                            style: TextStyle(color: Colors.greenAccent, fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildTelemetryStat('ETA to Victim', '6 Mins', Icons.timer_rounded, Colors.amberAccent),
+                        _buildTelemetryStat('Distance', '1.8 km', Icons.straighten_rounded, Colors.cyanAccent),
+                        _buildTelemetryStat('Squad Speed', '42 km/h', Icons.speed_rounded, Colors.greenAccent),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    LinearProgressIndicator(
+                      value: currentIncident.status == SosStatus.received
+                          ? 0.15
+                          : currentIncident.status == SosStatus.assigned
+                              ? 0.40
+                              : currentIncident.status == SosStatus.enRoute
+                                  ? 0.70
+                                  : currentIncident.status == SosStatus.onScene
+                                      ? 0.90
+                                      : 1.0,
+                      backgroundColor: Colors.white10,
+                      valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+                      minHeight: 6,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // 3. Status Progression Control Bar
+              _buildStatusProgressionSection(context, currentIncident, activeNotifier),
               const SizedBox(height: 24),
 
-              // Status Progression Control Bar
-              _buildStatusProgressionSection(context, currentIncident, activeNotifier),
-              const SizedBox(height: 28),
-
-              // Chronological Lifecycle Timeline
+              // 4. Chronological Lifecycle Timeline
               SosTimelineWidget(timeline: currentIncident.timeline),
               const SizedBox(height: 32),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTelemetryStat(String label, String value, IconData icon, Color color) {
+    return Column(
+      children: [
+        Icon(icon, color: color, size: 20),
+        const SizedBox(height: 4),
+        Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+        Text(label, style: const TextStyle(color: Colors.white60, fontSize: 11)),
+      ],
     );
   }
 

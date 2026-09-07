@@ -31,79 +31,87 @@ class RiskCircleLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: cities.map((city) {
         final isSelected = selectedCity?.id == city.id;
         final riskColor = _getRiskColor(city.riskLevel);
-        final baseSize = (city.severityRadiusKm * 2.2).clamp(32.0, 75.0);
+        final baseSize = (city.severityRadiusKm * 2.2).clamp(36.0, 80.0);
 
         return Positioned(
-          // Relative geographic placement projection placeholder for Tamil Nadu grid (Lat 8.0..13.5, Long 76.2..80.5)
-          left: ((city.longitude - 76.2) / (80.5 - 76.2) * MediaQuery.of(context).size.width)
-              .clamp(20.0, MediaQuery.of(context).size.width - 60.0),
-          top: (((13.5 - city.latitude) / (13.5 - 8.0)) * (MediaQuery.of(context).size.height * 0.65))
-              .clamp(40.0, (MediaQuery.of(context).size.height * 0.65) - 60.0),
+          // Relative geographic placement projection for Tamil Nadu grid (Lat 8.0..13.5, Long 76.2..80.5)
+          left: ((city.longitude - 76.2) / (80.5 - 76.2) * (MediaQuery.of(context).size.width - 60))
+              .clamp(16.0, MediaQuery.of(context).size.width - 80.0),
+          top: (((13.5 - city.latitude) / (13.5 - 8.0)) * (MediaQuery.of(context).size.height * 0.55))
+              .clamp(30.0, (MediaQuery.of(context).size.height * 0.55)),
           child: GestureDetector(
             onTap: () => onCityTapped(city),
             child: Semantics(
               button: true,
               label: '${city.name}, ${city.district}: ${city.riskLevel.name} with ${city.riskPercentage}% risk.',
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                width: isSelected ? baseSize * 1.3 : baseSize,
-                height: isSelected ? baseSize * 1.3 : baseSize,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: showRiskCircles
-                      ? riskColor.withValues(alpha: isSelected ? 0.45 : 0.22)
-                      : Colors.transparent,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: isSelected ? Colors.white : riskColor,
-                    width: isSelected ? 3.0 : 1.8,
-                  ),
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: riskColor.withValues(alpha: 0.6),
-                            blurRadius: 16,
-                            spreadRadius: 4,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.75),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: riskColor.withValues(alpha: 0.8),
-                      width: 1,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 1. Risk Circle Pulse Target
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    width: isSelected ? baseSize * 1.2 : baseSize,
+                    height: isSelected ? baseSize * 1.2 : baseSize,
+                    decoration: BoxDecoration(
+                      color: showRiskCircles
+                          ? riskColor.withValues(alpha: isSelected ? 0.45 : 0.22)
+                          : Colors.transparent,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected ? Colors.white : riskColor,
+                        width: isSelected ? 2.5 : 1.5,
+                      ),
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: riskColor.withValues(alpha: 0.6),
+                                blurRadius: 16,
+                                spreadRadius: 3,
+                              ),
+                            ]
+                          : null,
                     ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 6,
-                        height: 6,
+                    child: Center(
+                      child: Container(
+                        width: 10,
+                        height: 10,
                         decoration: BoxDecoration(
                           color: riskColor,
                           shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 1.5),
                         ),
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        city.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 3),
+
+                  // 2. Clear City Label Badge (No overflow)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.82),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: isSelected ? Colors.white : riskColor.withValues(alpha: 0.8),
+                        width: isSelected ? 1.5 : 0.8,
+                      ),
+                    ),
+                    child: Text(
+                      city.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
