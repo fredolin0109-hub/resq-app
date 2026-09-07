@@ -177,7 +177,9 @@ class _RescueMapScreenState extends State<RescueMapScreen> {
         // 1. Tactical Map Background (Simulated Map Canvas with Pan / Zoom Gesture Detectors)
         Positioned.fill(
           child: Container(
-            color: const Color(0xFF18222D), // Deep Navy Tactical Map Tone
+            color: theme.brightness == Brightness.dark
+                ? const Color(0xFF18222D)
+                : const Color(0xFFE2E8F0),
             child: GestureDetector(
               onDoubleTap: () => _notifier.zoomIn(),
               onScaleUpdate: (details) {
