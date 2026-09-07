@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 
-/// Generic modular placeholder screen for unbuilt Rescue subpages.
+// Real Feature Screens from all 11 Rescue Submodules
+import '../../admin/presentation/screens/about_system_screen.dart';
+import '../../admin/presentation/screens/application_settings_screen.dart';
+import '../../admin/presentation/screens/audit_logs_screen.dart';
+import '../../admin/presentation/screens/monitoring_dashboard_screen.dart';
+import '../../admin/presentation/screens/notification_center_screen.dart';
+import '../../admin/presentation/screens/user_management_screen.dart';
+import '../../ai_commander/presentation/screens/ai_commander_dashboard_screen.dart';
+import '../../analytics/presentation/screens/analytics_dashboard_screen.dart';
+import '../../digital_twin/presentation/screens/digital_twin_dashboard_screen.dart';
+import '../../map/presentation/screens/rescue_map_screen.dart';
+import '../../offline/presentation/screens/offline_dashboard_screen.dart';
+import '../../resources/presentation/screens/resource_dashboard_screen.dart';
+import '../../sos/presentation/screens/mission_history_screen.dart';
+import '../../sos/presentation/screens/sos_dashboard_screen.dart';
+import '../../team_management/presentation/screens/rescue_teams_dashboard_screen.dart';
+import 'officer_profile_screen.dart';
+
+/// Generic modular fallback screen for unbuilt Rescue subpages.
 class RescueSubpagePlaceholderScreen extends StatelessWidget {
   final String title;
   final String routeName;
@@ -87,82 +105,37 @@ class RescueSubpagePlaceholderScreen extends StatelessWidget {
   }
 }
 
-/// Helper builders for each subpage route
+/// Dynamic Route Builders routing directly to production-grade module screens
 class RescueRoutePlaceholders {
-  static Widget missionMap() => const RescueSubpagePlaceholderScreen(
-        title: 'Mission Map',
-        routeName: '/rescue/map',
-        icon: Icons.map_rounded,
-        description: 'Interactive live mission map, field responder waypoints, and tactical navigation overlays.',
-      );
+  static Widget missionMap() => const RescueMapScreen();
 
-  static Widget sosDashboard() => const RescueSubpagePlaceholderScreen(
-        title: 'SOS Alerts & Triage',
-        routeName: '/rescue/alerts',
-        icon: Icons.sos_rounded,
-        description: 'Real-time SOS distress alerts, victim prioritization, and urgent rescue queue.',
-      );
+  static Widget sosDashboard() => const SosDashboardScreen();
 
-  static Widget digitalTwin() => const RescueSubpagePlaceholderScreen(
-        title: 'Digital Twin Simulation',
-        routeName: '/rescue/digital-twin',
-        icon: Icons.view_in_ar_rounded,
-        description: '3D structural models, hazard perimeter simulations, and infrastructure damage telemetry.',
-      );
+  static Widget digitalTwin() => const DigitalTwinDashboardScreen();
 
-  static Widget aiCommander() => const RescueSubpagePlaceholderScreen(
-        title: 'AI Tactical Commander',
-        routeName: '/rescue/ai',
-        icon: Icons.psychology_rounded,
-        description: 'AI-assisted response optimization, triage suggestions, and squad dispatch suggestions.',
-      );
+  static Widget aiCommander() => const AICommanderDashboardScreen();
 
-  static Widget resources() => const RescueSubpagePlaceholderScreen(
-        title: 'Rescue Resources',
-        routeName: '/rescue/resources',
-        icon: Icons.inventory_2_rounded,
-        description: 'Logistics tracking for medical kits, boats, drones, stretchers, and relief supplies.',
-      );
+  static Widget resources() => const ResourceDashboardScreen();
 
-  static Widget teams() => const RescueSubpagePlaceholderScreen(
-        title: 'Rescue Teams',
-        routeName: '/rescue/teams',
-        icon: Icons.groups_rounded,
-        description: 'Personnel status, squad rosters, deployment tracking, and mesh check-in status.',
-      );
+  static Widget teams() => const RescueTeamsDashboardScreen();
 
-  static Widget missionHistory() => const RescueSubpagePlaceholderScreen(
-        title: 'Mission History',
-        routeName: '/rescue/history',
-        icon: Icons.history_rounded,
-        description: 'Archived rescue mission logs, incident post-mortems, and response telemetry records.',
-      );
+  static Widget missionHistory() => const MissionHistoryScreen();
 
-  static Widget reports() => const RescueSubpagePlaceholderScreen(
-        title: 'Field Reports',
-        routeName: '/rescue/reports',
-        icon: Icons.assessment_rounded,
-        description: 'Incident summaries, casualty assessments, and operational export logs.',
-      );
+  static Widget reports() => const AnalyticsDashboardScreen();
 
-  static Widget profile() => const RescueSubpagePlaceholderScreen(
-        title: 'Officer Profile',
-        routeName: '/rescue/profile',
-        icon: Icons.person_rounded,
-        description: 'Commander credentials, assigned squad, mesh radio IDs, and encryption keys.',
-      );
+  static Widget profile() => const OfficerProfileScreen();
 
-  static Widget notifications() => const RescueSubpagePlaceholderScreen(
-        title: 'Mission Notifications',
-        routeName: '/rescue/notifications',
-        icon: Icons.notifications_rounded,
-        description: 'Broadcast alerts, mesh priority pings, and escalation notices.',
-      );
+  static Widget notifications() => const NotificationCenterScreen();
 
-  static Widget settings() => const RescueSubpagePlaceholderScreen(
-        title: 'Command Settings',
-        routeName: '/rescue/settings',
-        icon: Icons.settings_rounded,
-        description: 'Mesh sync interval, offline map tile cache, telemetry parameters, and security.',
-      );
+  static Widget settings() => const ApplicationSettingsScreen();
+
+  static Widget offline() => const OfflineDashboardScreen();
+
+  static Widget monitoring() => const MonitoringDashboardScreen();
+
+  static Widget userManagement() => const UserManagementScreen();
+
+  static Widget auditLogs() => const AuditLogsScreen();
+
+  static Widget about() => const AboutSystemScreen();
 }

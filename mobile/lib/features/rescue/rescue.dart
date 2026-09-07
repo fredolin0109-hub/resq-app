@@ -28,6 +28,7 @@ export 'presentation/controllers/rescue_dashboard_controller.dart';
 export 'presentation/providers/rescue_dashboard_provider.dart';
 export 'presentation/providers/rescue_dashboard_state.dart';
 export 'presentation/screens/rescue_dashboard_screen.dart';
+export 'presentation/screens/officer_profile_screen.dart';
 export 'presentation/screens/rescue_subpage_placeholder_screens.dart';
 export 'presentation/widgets/dashboard_empty_view.dart';
 export 'presentation/widgets/dashboard_error_view.dart';
