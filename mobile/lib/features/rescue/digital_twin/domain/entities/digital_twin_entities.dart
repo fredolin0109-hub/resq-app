@@ -130,13 +130,13 @@ extension InfrastructureTypeX on InfrastructureType {
       case InfrastructureType.road:
         return Icons.alt_route_rounded;
       case InfrastructureType.bridge:
-        return Icons.arch_rounded;
+        return Icons.apartment_rounded;
       case InfrastructureType.hospital:
         return Icons.local_hospital_rounded;
       case InfrastructureType.policeStation:
         return Icons.local_police_rounded;
       case InfrastructureType.fireStation:
-        return Icons.fire_hydrant_rounded;
+        return Icons.local_fire_department_rounded;
       case InfrastructureType.communicationTower:
         return Icons.cell_tower_rounded;
       case InfrastructureType.powerGrid:

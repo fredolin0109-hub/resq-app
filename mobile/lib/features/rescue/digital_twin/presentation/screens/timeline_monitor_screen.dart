@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/datasources/digital_twin_mock_datasource.dart';
 import '../../domain/entities/digital_twin_entities.dart';
 import '../providers/digital_twin_provider.dart';
+import '../providers/digital_twin_state.dart';
 import '../widgets/timeline_event_tile.dart';
 import '../widgets/digital_twin_empty_view.dart';
 
@@ -284,7 +285,7 @@ class _TimelineMonitorScreenState extends State<TimelineMonitorScreen> {
                         onResetFilters: () {
                           _searchController.clear();
                           _notifier.updateTimelineFilters(
-                            const TimelineFilterOptions(),
+                            TimelineFilterOptions(),
                           );
                         },
                       )

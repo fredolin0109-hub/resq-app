@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/datasources/offline_mock_datasource.dart';
 import '../../domain/entities/offline_entities.dart';
 import '../providers/offline_provider.dart';
+import '../providers/offline_state.dart';
 import '../widgets/mesh_device_card.dart';
 import '../widgets/offline_empty_view.dart';
 

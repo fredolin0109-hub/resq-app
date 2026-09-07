@@ -383,7 +383,7 @@ class SituationSummary {
   final List<String> resourcesDeployed;
   final List<String> emergingRisks;
   final List<String> suggestedNextActions;
-  final DateTime generatedAt;
+  final DateTime? generatedAt;
   final String primaryDistrict;
   final int totalEvacuees;
   final int activeMissions;
@@ -395,7 +395,7 @@ class SituationSummary {
     required this.resourcesDeployed,
     required this.emergingRisks,
     required this.suggestedNextActions,
-    required this.generatedAt,
+    this.generatedAt,
     required this.primaryDistrict,
     required this.totalEvacuees,
     required this.activeMissions,
@@ -408,7 +408,7 @@ class SituationSummary {
     resourcesDeployed: [],
     emergingRisks: [],
     suggestedNextActions: [],
-    generatedAt: null as dynamic,
+    generatedAt: null,
     primaryDistrict: '',
     totalEvacuees: 0,
     activeMissions: 0,

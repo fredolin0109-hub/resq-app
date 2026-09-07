@@ -38,7 +38,8 @@ class _SituationSummaryScreenState extends State<SituationSummaryScreen> {
     if (mounted) setState(() {});
   }
 
-  String _formatDateTime(DateTime dt) {
+  String _formatDateTime(DateTime? dt) {
+    if (dt == null) return 'Live Dynamic Feed';
     return '${dt.day}/${dt.month}/${dt.year} at ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')} IST';
   }
 
@@ -47,7 +48,7 @@ class _SituationSummaryScreenState extends State<SituationSummaryScreen> {
     final state = _notifier.state;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final sitRep = _notifier.getSituationSummaryUseCase.repository.getSituationSummary(district: _selectedDistrict);
+    final report = state.situationSummary ?? SituationSummary.empty;
 
     return Scaffold(
       appBar: AppBar(
@@ -64,17 +65,8 @@ class _SituationSummaryScreenState extends State<SituationSummaryScreen> {
           ),
         ],
       ),
-      body: FutureBuilder<SituationSummary>(
-        future: sitRep,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final report = snapshot.data!;
-
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -271,9 +263,7 @@ class _SituationSummaryScreenState extends State<SituationSummaryScreen> {
                 const SizedBox(height: 24),
               ],
             ),
-          );
-        },
-      ),
+          ),
     );
   }
 

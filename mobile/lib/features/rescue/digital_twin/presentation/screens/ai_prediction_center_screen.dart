@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/datasources/digital_twin_mock_datasource.dart';
 import '../../domain/entities/digital_twin_entities.dart';
 import '../providers/digital_twin_provider.dart';
+import '../providers/digital_twin_state.dart';
 import '../widgets/prediction_card.dart';
 import '../widgets/digital_twin_empty_view.dart';
 import 'twin_resource_allocation_screen.dart';
@@ -310,7 +311,7 @@ class _AIPredictionCenterScreenState extends State<AIPredictionCenterScreen> {
                         onResetFilters: () {
                           _searchController.clear();
                           _notifier.updatePredictionFilters(
-                            const PredictionFilterOptions(),
+                            PredictionFilterOptions(),
                           );
                         },
                       )

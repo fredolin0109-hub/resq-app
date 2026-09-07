@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../data/datasources/digital_twin_mock_datasource.dart';
 import '../../domain/entities/digital_twin_entities.dart';
 import '../providers/digital_twin_provider.dart';
+import '../providers/digital_twin_state.dart';
 import '../widgets/infrastructure_card.dart';
 import '../widgets/digital_twin_empty_view.dart';
 
@@ -282,7 +283,7 @@ class _InfrastructureStatusScreenState
                         onResetFilters: () {
                           _searchController.clear();
                           _notifier.updateInfrastructureFilters(
-                            const InfrastructureFilterOptions(),
+                            InfrastructureFilterOptions(),
                           );
                         },
                       )

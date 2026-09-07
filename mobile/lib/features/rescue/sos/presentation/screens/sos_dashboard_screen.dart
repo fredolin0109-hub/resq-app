@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/sos_incident_entity.dart';
 import '../providers/sos_provider.dart';
+import '../providers/sos_state.dart';
 import '../widgets/sos_empty_view.dart';
 import '../widgets/sos_filter_sheet.dart';
 import '../widgets/sos_incident_card.dart';
