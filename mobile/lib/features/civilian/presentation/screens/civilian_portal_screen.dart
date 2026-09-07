@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../rescue/presentation/screens/rescue_dashboard_screen.dart';
+import 'package:resq_app/features/rescue/presentation/screens/rescue_dashboard_screen.dart';
 
 /// Production-ready Civilian Distress, Safety Check-in & Shelter Portal.
 class CivilianPortalScreen extends StatefulWidget {

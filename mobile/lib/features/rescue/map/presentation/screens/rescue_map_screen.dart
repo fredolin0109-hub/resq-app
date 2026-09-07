@@ -171,6 +171,7 @@ class _RescueMapScreenState extends State<RescueMapScreen> {
     }
 
     final isWide = MediaQuery.of(context).size.width >= 800;
+    final theme = Theme.of(context);
 
     return Stack(
       children: [
