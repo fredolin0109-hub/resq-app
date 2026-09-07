@@ -308,7 +308,7 @@ class _MeshNetworkMonitorScreenState extends State<MeshNetworkMonitorScreen> {
                         icon: Icons.radar_rounded,
                         onResetFilters: () {
                           _searchController.clear();
-                          _notifier.updateMeshFilters(const MeshFilterOptions());
+                          _notifier.updateMeshFilters(MeshFilterOptions());
                         },
                       )
                     : ListView.builder(

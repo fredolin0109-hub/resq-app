@@ -329,7 +329,7 @@ class _MessageQueueScreenState extends State<MessageQueueScreen> {
                         icon: Icons.mark_chat_read_rounded,
                         onResetFilters: () {
                           _searchController.clear();
-                          _notifier.updateQueueFilters(const QueueFilterOptions());
+                          _notifier.updateQueueFilters(QueueFilterOptions());
                         },
                       )
                     : ListView.builder(

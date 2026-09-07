@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../domain/entities/analytics_entities.dart';
 import '../../data/datasources/analytics_mock_datasource.dart';
 import '../providers/analytics_provider.dart';
 import '../providers/analytics_state.dart';
